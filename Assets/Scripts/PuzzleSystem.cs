@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Puzzle : MonoBehaviour
+public class PuzzleSystem : MonoBehaviour
 {
     public float height = 1f;
     public float speed = 1f;

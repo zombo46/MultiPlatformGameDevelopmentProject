@@ -17,7 +17,8 @@ public class PlayerMovement : MonoBehaviour
     public float crouchMultiplier = 0.5f;
     // Private variables for internal state - do not modify these directly
     private Vector3 moveDirection = Vector3.zero;
-    private float rotationX = 0;
+    private float rotationX = 0f; // pitch
+    private float rotationY = 0f; // yaw (explicit)
     private CharacterController characterController;
     private bool isCrouched = false;
     // Flag to control if the player can move - set to false to disable movement.
@@ -29,6 +30,15 @@ public class PlayerMovement : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        // Initialize rotation state from existing transforms so pitch continues from the current camera angle.
+        rotationY = transform.eulerAngles.y;
+        if (playerCamera != null)
+        {
+            float camPitch = playerCamera.transform.localEulerAngles.x;
+            if (camPitch > 180f) camPitch -= 360f; // convert 0..360 to -180..180
+            rotationX = camPitch;
+        }
     }
 
     void Update()
@@ -77,13 +87,24 @@ public class PlayerMovement : MonoBehaviour
         }
         // Move the character controller based on the calculated movement direction.
         characterController.Move(moveDirection * Time.deltaTime);
+
         // Handle player rotation based on mouse movement, clamping vertical look angle to prevent excessive rotation (e.g., looking directly up or down).
         if (canMove)
         {
-            rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
+            // Use explicit yaw/pitch state and raw axes for nicer input.
+            float mouseX = Input.GetAxisRaw("Mouse X");
+            float mouseY = Input.GetAxisRaw("Mouse Y");
+
+            rotationX += -mouseY * lookSpeed;
             rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
-            playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
-            transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
+
+            rotationY += mouseX * lookSpeed;
+
+            // Apply pitch to the camera (local rotation) and yaw to the player transform.
+            if (playerCamera != null)
+                playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0f, 0f);
+
+            transform.localRotation = Quaternion.Euler(0f, rotationY, 0f);
         }
     }
 }

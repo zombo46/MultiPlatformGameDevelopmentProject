@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PressurePlatePuzzle : MonoBehaviour
 {
-    public Puzzle door;
+    public PuzzleSystem door;
     
     private void OnTriggerEnter(Collider collider) {
         if (collider.CompareTag("Player")) {
