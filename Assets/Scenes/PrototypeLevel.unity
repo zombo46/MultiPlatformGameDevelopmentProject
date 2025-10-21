@@ -120,6 +120,60 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &171345461
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 171345463}
+  - component: {fileID: 171345464}
+  m_Layer: 0
+  m_Name: OxygenSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &171345463
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 171345461}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 135.32619, y: 1.4910853, z: 156.95583}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &171345464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 171345461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5193fefb2efef2e459a4d68d7124006d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oxygenPrefab: {fileID: 673796953546688274, guid: 9adb5d54ac2fceb498eaa9f9ac4e920a, type: 3}
+  terrain: {fileID: 839787052}
+  spawnCount: 30
+  spawnHeight: 1
+  minY: 10
+  maxAttempts: 30
+  minDistanceBetweenObjects: 2
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &358525691
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,7 +188,7 @@ GameObject:
   - component: {fileID: 358525695}
   - component: {fileID: 358525694}
   - component: {fileID: 358525693}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Stairs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1683,7 +1737,7 @@ GameObject:
   - component: {fileID: 414441773}
   - component: {fileID: 414441772}
   - component: {fileID: 414441771}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ShipInterior
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8672,7 +8726,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-59266
+  m_Name: pb_Mesh24734
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -8837,7 +8891,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-71842
+  m_Name: pb_Mesh24760
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -9010,7 +9064,7 @@ GameObject:
   - component: {fileID: 1275089859}
   - component: {fileID: 1275089858}
   - component: {fileID: 1275089857}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ShipExteriror
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16080,7 +16134,7 @@ Transform:
   m_GameObject: {fileID: 1341847380}
   serializedVersion: 2
   m_LocalRotation: {x: 0.0100220805, y: 0.9983889, z: 0.0005606164, w: -0.05584807}
-  m_LocalPosition: {x: 146.8, y: 3.6, z: 161.2}
+  m_LocalPosition: {x: 146.75, y: 1.25, z: 161.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16092,7 +16146,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-44820
+  m_Name: pb_Mesh24720
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -16321,7 +16375,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1881380022}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SpaceShip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16462,3 +16516,4 @@ SceneRoots:
   - {fileID: 2119415950}
   - {fileID: 1881380022}
   - {fileID: 839787053}
+  - {fileID: 171345463}
