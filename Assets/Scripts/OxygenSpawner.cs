@@ -16,17 +16,31 @@ public class OxygenSpawner : MonoBehaviour
     public float minDistanceBetweenObjects = 2f;
     public LayerMask obstacleMask;
 
+    // Name of the layer to put oxygen collectables on (must exist in Project Settings -> Tags and Layers)
+    public string oxygenLayerName = "OxygenCollectable";
+
     private int instancesSpawned = 0;
+    private int oxygenLayerIndex = 0;
+    private int oxygenLayerMask = 0;
 
     void Start()
-  {
-        if (!terrain||!oxygenPrefab) {
+    {
+        if (!terrain || !oxygenPrefab)
+        {
             Debug.LogError("OxygenSpawner: Terrain or OxygenPrefab not assigned.");
             return;
         }
 
+        // Resolve layer index and mask, validate existence
+        oxygenLayerIndex = LayerMask.NameToLayer(oxygenLayerName);
+        if (oxygenLayerIndex < 0)
+        {
+            Debug.LogError($"OxygenSpawner: Layer '{oxygenLayerName}' not defined.");
+            oxygenLayerIndex = 0;
+        }
+
         SpawnOxygen();
-  }
+    }
 
     void SpawnOxygen()
     {
@@ -38,9 +52,9 @@ public class OxygenSpawner : MonoBehaviour
 
             float x = Random.Range(0, terrain.terrainData.size.x);
             float z = Random.Range(0, terrain.terrainData.size.z);
-            float y = terrain.SampleHeight(new Vector3(x,0f, z)) + terrain.transform.position.y;
+            float y = terrain.SampleHeight(new Vector3(x, 0f, z)) + terrain.transform.position.y;
 
-            if (y > spawnHeight) 
+            if (y > spawnHeight)
             {
                 continue;
             }
@@ -48,21 +62,20 @@ public class OxygenSpawner : MonoBehaviour
             Vector3 position = new Vector3(x, y + 0.5f, z);
 
             bool touchesObstacle = Physics.CheckSphere(position, minDistanceBetweenObjects, obstacleMask);
-
             if (touchesObstacle)
             {
                 continue;
             }
 
-            if (Physics.CheckSphere(position, minY, LayerMask.GetMask("OxygenCollectable")))
+            // Check if there are existing oxygen objects nearby using the cached mask
+            if (oxygenLayerMask != 0 && Physics.CheckSphere(position, minY, oxygenLayerMask))
             {
                 continue;
             }
 
             GameObject oxygenInstance = Instantiate(oxygenPrefab, position, Quaternion.identity);
-            oxygenInstance.layer = LayerMask.NameToLayer("OxygenCollectable");
+            oxygenInstance.layer = oxygenLayerIndex;
             instancesSpawned++;
-
         }
     }
 }
