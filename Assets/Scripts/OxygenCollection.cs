@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class OxygenCollection : MonoBehaviour
 {
-    void onTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Destroy(other.gameObject);
+            Destroy(gameObject);
         }
     }
 }
