@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PuzzleSystem : MonoBehaviour
 {
-    public float height = 1f;
-    public float speed = 1f;
+    public float height = 10f;
+    public float speed = 2f;
     private Vector3 closed;
     private Vector3 open;
     private bool isOpen = false;
@@ -26,7 +26,7 @@ public class PuzzleSystem : MonoBehaviour
         } else {
             target = closed;
         }
-        transform.position = Vector3.Lerp(transform.position, target, Time.deltaTime * speed);
+        transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * speed);
     }
 
     public void OpenDoor(){
