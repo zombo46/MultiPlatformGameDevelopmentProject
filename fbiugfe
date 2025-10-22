@@ -1,0 +1,175 @@
+[33mcommit 821a9d0f0530f024d1eb4e08fecb15cd591dd3bb[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: markmitchxll <ec22698@qmul.ac.uk>
+Date:   Wed Oct 22 23:38:54 2025 +0100
+
+    Made oxygen bar interact with orbs
+
+[33mcommit 33ed2a38205f5a35e8367a0c26463fea749f8828[m
+Author: Andreas <andreasmantzoukis30@gmail.com>
+Date:   Wed Oct 22 21:45:12 2025 +0100
+
+    added a tree prefab, painted a forrest and added a first iteration of the repair component colectable
+
+[33mcommit 987550d107811070ac355cb45a8d497eee6c5a8b[m[33m ([m[1;31morigin/EnemyDamageSystem[m[33m)[m
+Author: Alex Arthur Camfield <a.camfield@se22.qmul.ac.uk>
+Date:   Wed Oct 22 14:25:21 2025 +0100
+
+    Fix Sliders
+
+[33mcommit 3937081a2c75ffefd536c963b330f29164fb155c[m
+Merge: a3fded6 4289f32
+Author: zombo46 <158166780+zombo46@users.noreply.github.com>
+Date:   Wed Oct 22 14:19:48 2025 +0100
+
+    Merge pull request #6 from zombo46/PlayerHealthSystem
+    
+    Player health system
+
+[33mcommit 4289f3239ac2995a6778b52412d41b6586de4b97[m[33m ([m[1;31morigin/PlayerHealthSystem[m[33m)[m
+Merge: 972ea2e a3fded6
+Author: zombo46 <158166780+zombo46@users.noreply.github.com>
+Date:   Wed Oct 22 14:19:37 2025 +0100
+
+    Merge branch 'main' into PlayerHealthSystem
+
+[33mcommit 972ea2e2419d5a91814adf1749c9f7213d4baf4c[m
+Author: Alex Arthur Camfield <a.camfield@se22.qmul.ac.uk>
+Date:   Wed Oct 22 14:13:09 2025 +0100
+
+    Rename OxygenSystem to PlayerVitality
+
+[33mcommit 719eed5fafcb2cbaa0511a88900a3e34ef299f37[m
+Author: Alex Arthur Camfield <a.camfield@se22.qmul.ac.uk>
+Date:   Wed Oct 22 14:00:52 2025 +0100
+
+    Make heath bar
+
+[33mcommit a3fded69d874a1eb674cadb42da01c286c5591fb[m
+Merge: b0d7ebb 7b39210
+Author: dorthpedro <darthb04@gmail.com>
+Date:   Tue Oct 21 22:46:09 2025 +0100
+
+    Merge pull request #5 - Interactable Button
+    
+    Fixed oxygen stuff, added interactable button
+
+[33mcommit 7b392107b4b4877133f9afe813ef64ea3a8aa627[m
+Author: dorthpedro <darthb04@gmail.com>
+Date:   Tue Oct 21 22:44:58 2025 +0100
+
+    Fixed a lot of stuff, added interactable class
+    
+    There were issues with the oxygen spawner, they are now fixed. Also added an interactable cube as a demonstration of an interaction button (E) - can be used for future interactable stuff.
+
+[33mcommit b0d7ebb11324338d80f4c9002874227de104a639[m
+Author: dorthpedro <darthb04@gmail.com>
+Date:   Tue Oct 21 22:18:11 2025 +0100
+
+    Fixed a few bugs
+    
+    Fixed oxygen collectible destroying player camera (lol) and added player into the new level scene
+
+[33mcommit dff016e6889cf36b8beda75f5e9924c5f15aec28[m
+Merge: eae7208 6f32e1e
+Author: Andreas Mantzoukis <84538378+BearEmperor@users.noreply.github.com>
+Date:   Tue Oct 21 21:43:43 2025 +0100
+
+    Merge pull request #4 from zombo46/Level-Design
+    
+    Level design Scene added, oxygen resource spawner implemented
+
+[33mcommit eae7208c761ecb2a40efadb7f2ee37515e0cf0a6[m
+Author: dorthpedro <darthb04@gmail.com>
+Date:   Tue Oct 21 21:30:27 2025 +0100
+
+    Resolved Bugs with Merge
+    
+    Resolving some issues with movement / cameras and the sort. Also ran into a game object not found issue which is now resolved too.
+
+[33mcommit ebee20570d8e7166cabdeb0f21c63c82b563e198[m
+Merge: 287a8c1 314dbec
+Author: dorthpedro <darthb04@gmail.com>
+Date:   Tue Oct 21 21:02:47 2025 +0100
+
+    Merge pull request #3 from movementandgathering
+    
+    Added Player Movement
+
+[33mcommit 314dbec53944f1d2e1712e3bd67586763c5c947e[m
+Merge: 1f312e5 287a8c1
+Author: dorthpedro <darthb04@gmail.com>
+Date:   Tue Oct 21 21:02:31 2025 +0100
+
+    Merge branch 'main' into movementandgathering
+
+[33mcommit 6f32e1e6ac10f960c1e9d99441e742f8b24e4a36[m[33m ([m[1;31morigin/Level-Design[m[33m)[m
+Merge: a334269 287a8c1
+Author: Andreas <andreasmantzoukis30@gmail.com>
+Date:   Tue Oct 21 13:15:54 2025 +0100
+
+    Merge branch 'main' of https://github.com/zombo46/MultiPlatformGameDevelopmentProject
+
+[33mcommit a334269b8cc042421d27723c1c593d8ec779c713[m
+Author: Andreas <andreasmantzoukis30@gmail.com>
+Date:   Tue Oct 21 13:09:29 2025 +0100
+
+    Added an oxygen orb that is collectable and an orb spawner that acts in changeable parameters
+
+[33mcommit e2987c799cd215c46eaa2e8c899f2411a758d004[m
+Author: Andreas <andreasmantzoukis30@gmail.com>
+Date:   Tue Oct 21 11:31:48 2025 +0100
+
+    created a new scene with a model of a space ship and some terrain
+
+[33mcommit 287a8c117d455976d1a1f9887c0c2894e8366a90[m
+Author: markmitchxll <ec22698@qmul.ac.uk>
+Date:   Tue Oct 21 01:16:14 2025 +0100
+
+    Made a basic pressure plate puzzle
+
+[33mcommit c7a9917872ebd05a2ea81ccc79842838626dffdc[m
+Author: markmitchxll <ec22698@qmul.ac.uk>
+Date:   Mon Oct 20 00:33:05 2025 +0100
+
+    Basic oxygen system
+
+[33mcommit 1f312e58524181f215b00efa26d6e6f78a6785fa[m
+Author: dorthpedro <darthb04@gmail.com>
+Date:   Sun Oct 19 22:40:40 2025 +0100
+
+    Added Player Movement
+    
+    First person POV, added gravity / stuff to check rotation and all. Exact values are placeholder
+
+[33mcommit ae153503dfb2387f3c1a642f509adba711b76bef[m[33m ([m[1;31morigin/oxygen[m[33m)[m
+Merge: f91704f 98f3f68
+Author: zombo46 <158166780+zombo46@users.noreply.github.com>
+Date:   Fri Oct 17 17:18:39 2025 +0100
+
+    Merge pull request #1 from zombo46/BasicEnemyCode
+    
+    Make basic enemy movement
+
+[33mcommit 98f3f68b3c01355fa7064640821acb5ebafb20f9[m[33m ([m[1;31morigin/BasicEnemyCode[m[33m)[m
+Author: Alex Arthur Camfield <a.camfield@se22.qmul.ac.uk>
+Date:   Fri Oct 17 17:06:06 2025 +0100
+
+    Make basic enemy movement
+
+[33mcommit f91704f9a2e63def594a0ec8d8548cdb8281feea[m
+Author: Alex Arthur Camfield <a.camfield@se22.qmul.ac.uk>
+Date:   Thu Oct 16 15:01:35 2025 +0100
+
+    Fix files
+
+[33mcommit 1ce13695e1ea87a67b39d02a41aed6eefd5e4453[m
+Author: Alex Arthur Camfield <a.camfield@se22.qmul.ac.uk>
+Date:   Thu Oct 16 14:54:45 2025 +0100
+
+    Make Unity Project
+
+[33mcommit 21a929106ccad0572fc0fb1b29cc9448ab78f0d8[m
+Author: zombo46 <158166780+zombo46@users.noreply.github.com>
+Date:   Sat Oct 11 17:54:50 2025 +0100
+
+    Initial commit
