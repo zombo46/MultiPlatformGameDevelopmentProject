@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class OxygenSystem : MonoBehaviour
+public class PlayerVitality : MonoBehaviour
 {
     public float maxOxygen = 100f;
     public float currentOxygen;
@@ -12,10 +12,19 @@ public class OxygenSystem : MonoBehaviour
     public Text oxygenText;
     private bool isDead = false;
 
+    public float PlayerMaxHealth = 100f;
+
+    public float PlayerCurrentHealth;
+
+    public Slider HealthBar;
+
+    public Text HealthText;
+
     // Start is called before the first frame update
     void Start()
     {
         currentOxygen = maxOxygen;
+        PlayerCurrentHealth = PlayerMaxHealth;
         updateUI();
     }
 
@@ -26,8 +35,15 @@ public class OxygenSystem : MonoBehaviour
             return;
         }
         currentOxygen = currentOxygen - Time.deltaTime;
-        if (currentOxygen <= 0) {
+        if (currentOxygen <= 0)
+        {
             currentOxygen = 0;
+            PlayerDeath();
+        }
+
+        if (PlayerCurrentHealth <= 0)
+        {
+            PlayerCurrentHealth = 0;
             PlayerDeath();
         }
         updateUI();
@@ -37,8 +53,19 @@ public class OxygenSystem : MonoBehaviour
         if (oxygenBar != null) {
             oxygenBar.value = currentOxygen / maxOxygen;
         }
-        if (oxygenText != null) {
+        if (oxygenText != null)
+        {
             oxygenText.text = $"{Mathf.Ceil(currentOxygen)}s";
+        }
+
+        if (HealthBar != null)
+        {
+            HealthBar.value = PlayerCurrentHealth / PlayerMaxHealth;
+        }
+
+        if (HealthText != null)
+        {
+            HealthText.text = $"HP: {Mathf.Ceil(PlayerCurrentHealth)}";
         }
     }
 
