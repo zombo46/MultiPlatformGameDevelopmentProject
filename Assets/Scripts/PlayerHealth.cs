@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestCube : MonoBehaviour, IInteractable
+public class PlayerHealth : MonoBehaviour
 {
-    public void Interact(Collider collider)
+    void OnTriggerStay(Collider collision)
     {
-        Debug.Log("Oh look at me I'm a cube oh my god");
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            collision.gameObject.SendMessage("ApplyDamage");
+        }
     }
     // Start is called before the first frame update
     void Start()
@@ -17,6 +20,6 @@ public class TestCube : MonoBehaviour, IInteractable
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

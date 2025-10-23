@@ -4,7 +4,7 @@ using UnityEngine;
 
 interface IInteractable
 {
-    void Interact();
+    void Interact(Collider collider);
 }
 public class Interactor : MonoBehaviour
 {
@@ -30,7 +30,7 @@ public class Interactor : MonoBehaviour
                 IInteractable interactable = collider.GetComponent<IInteractable>();
                 if (interactable != null)
                 {
-                    interactable.Interact();
+                    interactable.Interact(collider);
                     break;
                 }
             }

@@ -31,7 +31,8 @@ public class PlayerVitality : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isDead) {
+        if (isDead)
+        {
             return;
         }
         currentOxygen = currentOxygen - Time.deltaTime;
@@ -47,6 +48,11 @@ public class PlayerVitality : MonoBehaviour
             PlayerDeath();
         }
         updateUI();
+    }
+
+    public void ReduceHealth(float Amount)
+    {
+        PlayerCurrentHealth -= Amount;
     }
 
     void updateUI() {
@@ -71,6 +77,6 @@ public class PlayerVitality : MonoBehaviour
 
     void PlayerDeath() {
         isDead = true;
-
+        Debug.Log("Game Over!");
     }
 }
