@@ -24,6 +24,8 @@ public class PlayerMovement : MonoBehaviour
     // Flag to control if the player can move - set to false to disable movement.
     private bool canMove = true;
 
+    
+
     void Start()
     {
         // Get the CharacterController component attached to this GameObject and lock the cursor to the center of the screen. Used for first-person camera control.

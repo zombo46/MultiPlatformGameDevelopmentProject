@@ -2,12 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestCube : MonoBehaviour, IInteractable
+public class PlayerAttack : MonoBehaviour, IInteractable
 {
     public void Interact(Collider collider)
     {
-        Debug.Log("Oh look at me I'm a cube oh my god");
+        Debug.Log("Hello");
+        if (collider.gameObject.CompareTag("Enemy"))
+        {
+            Debug.Log("Interact!");
+            Destroy(collider.gameObject);
+        }
     }
+
     // Start is called before the first frame update
     void Start()
     {
