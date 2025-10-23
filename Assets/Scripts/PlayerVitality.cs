@@ -61,7 +61,7 @@ public class PlayerVitality : MonoBehaviour
         }
         if (oxygenText != null)
         {
-            oxygenText.text = $"{Mathf.Ceil(currentOxygen)}s";
+            oxygenText.text = $"Oxygen level: {Mathf.Ceil(currentOxygen)}%";
         }
 
         if (HealthBar != null)
