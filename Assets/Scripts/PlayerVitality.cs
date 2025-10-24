@@ -54,6 +54,15 @@ public class PlayerVitality : MonoBehaviour
         PlayerCurrentHealth -= Amount;
     }
 
+    public void revive()
+    {
+        isDead = false;
+        currentOxygen = maxOxygen;
+        PlayerCurrentHealth = PlayerMaxHealth;
+
+        this.transform.position = new Vector3(135f, 1f, 132f);
+    }
+
     void updateUI()
     {
         if (oxygenBar != null)
@@ -82,6 +91,7 @@ public class PlayerVitality : MonoBehaviour
     void PlayerDeath()
     {
         isDead = true;
+        this.SendMessage("ShowDeath");
     }
 
     // Public to pause or unpause oxygen depletion in other scripts.
