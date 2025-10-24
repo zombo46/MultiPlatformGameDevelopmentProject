@@ -35,6 +35,8 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+        playerInput = GetComponent<PlayerInput>();
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
@@ -48,9 +50,18 @@ public class PlayerMovement : MonoBehaviour
             if (camPitch > 180f) camPitch -= 360f;
             rotationX = camPitch;
         }
+
+        if (interactionPoint == null) {
+            interactionPoint = this.transform;
+        }
     }
 
-    void Update()
+    void Update() {
+        Movement();
+        Interaction();
+    }
+    
+    private void Movemet()
     {
         if (!canMove)
             return;
@@ -120,4 +131,37 @@ public class PlayerMovement : MonoBehaviour
             isCrouched = false;
         }
     }
+
+    // Public to allow other scripts to enable / disable player movement.
+    public void SetCanMove(bool enabled)
+    {
+        canMove = enabled;
+        if (!canMove)
+        {
+            // stop any residual movement and rotation immediately
+            moveDirection = Vector3.zero;
+        }
+    }
+
+    public bool GetCanMove()
+    {
+        return canMove;
+    }
+
+    private void Interaction() {
+        if (interact != null && interact.triggered) {
+            Collider[] colliders = Physics.OverlapSphere(interactionPoint.position, interactionRange);
+            foreach (Collider collider in colliders) {
+                IInteractable interactable = collider.GetComponent<IInteractable>;
+                if (interactable != null) {
+                    interactable.Interact(collider);
+                    break;
+                }
+            }
+        }
+    }
+}
+
+interface IInteractable {
+    void Interact(Collider collider);
 }
