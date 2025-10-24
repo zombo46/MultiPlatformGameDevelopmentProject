@@ -139,6 +139,22 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    // Public to allow other scripts to enable / disable player movement.
+    public void SetCanMove(bool enabled)
+    {
+        canMove = enabled;
+        if (!canMove)
+        {
+            // stop any residual movement and rotation immediately
+            moveDirection = Vector3.zero;
+        }
+    }
+
+    public bool GetCanMove()
+    {
+        return canMove;
+    }
+
     private void Interaction() {
         if (interact != null && interact.triggered) {
             Collider[] colliders = Physics.OverlapSphere(interactionPoint.position, interactionRange);
