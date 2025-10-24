@@ -8,6 +8,9 @@ public class SwitchCamera : MonoBehaviour
     public GameObject MainCamera;
     public GameObject Camera2;
 
+    public GameObject startCanvas;
+    public GameObject deathCanvas;
+
     public PlayerMovement playerMovement;
     public PlayerVitality playerVitality;
 
@@ -20,8 +23,13 @@ public class SwitchCamera : MonoBehaviour
     // Store main camera's original culling mask so we can restore it
     private int mainOriginalCullingMask = -1;
 
+    private bool playerDead;
+    
+
     void Start()
     {
+        playerDead = false;
+
         playerMovement = FindFirstObjectByType<PlayerMovement>();
         playerVitality = FindFirstObjectByType<PlayerVitality>();
 
@@ -84,11 +92,47 @@ public class SwitchCamera : MonoBehaviour
             Camera2.SetActive(true);
             var cam2 = Camera2.GetComponent<Camera>();
             if (cam2 != null) cam2.enabled = true;
+
+            startCanvas.SetActive(true);
+            deathCanvas.SetActive(false);
+        }
+    }
+
+    void ShowDeath()
+    {
+        hasSwitchedToMain = false;
+        
+        playerDead = true;
+
+        if (playerMovement != null)
+        {
+            playerMovement.SetCanMove(false);
+            Debug.Log("Game Over!");
+        }
+
+        else
+        {
+            Debug.LogWarning("ShowDeath: PlayerMovement is null; cannot disable movement for death.");
+        }
+
+        if (Camera2 != null)
+        {
+            Camera2.SetActive(true);
+            var cam2 = Camera2.GetComponent<Camera>();
+            if (cam2 != null) cam2.enabled = true;
+
+            startCanvas.SetActive(false);
+            deathCanvas.SetActive(true);
         }
     }
 
     public void SwitchToMain()
     {
+        if (playerDead)
+        {
+            this.SendMessage("revive");
+        }
+
         if (hasSwitchedToMain) return;
         hasSwitchedToMain = true;
 
