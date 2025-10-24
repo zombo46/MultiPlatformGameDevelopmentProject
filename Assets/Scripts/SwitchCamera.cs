@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class SwitchCamera : MonoBehaviour
 {
@@ -49,10 +50,25 @@ public class SwitchCamera : MonoBehaviour
 
     void Update()
     {
-        if (!hasSwitchedToMain && Input.GetKeyDown(KeyCode.C))
+        if (hasSwitchedToMain) return;
+
+        // Use the new Input System unconditionally for input checks.
+        // (This avoids the InvalidOperationException raised by calling UnityEngine.Input
+        // when the project uses the Input System package exclusively.)
+        // We still guard against null Keyboard/Gamepad instances to avoid NREs.
+        if (Keyboard.current != null && Keyboard.current.cKey.wasPressedThisFrame)
         {
             SwitchToMain();
+            return;
         }
+
+        if (Gamepad.current != null && (Gamepad.current.buttonSouth.wasPressedThisFrame || Gamepad.current.startButton.wasPressedThisFrame))
+        {
+            SwitchToMain();
+            return;
+        }
+
+        // If you still need legacy Input support, reintroduce a conditional fallback here.
     }
 
     void ShowIntro()

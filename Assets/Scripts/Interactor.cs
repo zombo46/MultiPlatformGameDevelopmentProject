@@ -5,35 +5,40 @@ using UnityEngine.InputSystem;
 
 interface IInteractable
 {
-   // void Interact(Collider collider);
+   void Interact(Collider collider);
 }
 public class Interactor : MonoBehaviour
 {
     public Transform interactionPoint;
     public float interactionRange = 2f;
-    // Start is called before the first frame update
+
     void Start()
     {
-       // if (interactionPoint == null)
+        if (interactionPoint == null)
         {
-            //interactionPoint = this.transform;
+            interactionPoint = this.transform;
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.E))
+        // Input System only (keyboard-only)
+        bool interactPressed = (Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame);
+
+        if (interactPressed)
+            DoInteraction();
+    }
+
+    private void DoInteraction()
+    {
+        Collider[] colliders = Physics.OverlapSphere(interactionPoint.position, interactionRange);
+        foreach (Collider collider in colliders)
         {
-            //Collider[] colliders = Physics.OverlapSphere(interactionPoint.position, interactionRange);
-            //foreach (Collider collider in colliders)
+            IInteractable interactable = collider.GetComponent<IInteractable>();
+            if (interactable != null)
             {
-              //  IInteractable interactable = collider.GetComponent<IInteractable>();
-                //if (interactable != null)
-                {
-                  //  interactable.Interact(collider);
-                   // break;
-                }
+                interactable.Interact(collider);
+                break;
             }
         }
     }
