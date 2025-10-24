@@ -66160,7 +66160,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh40860
+  m_Name: pb_Mesh25916
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -81468,6 +81468,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 45874109}
     m_Modifications:
+    - target: {fileID: 539645549712321476, guid: 52b743296ecdbc0458f6c34c3adb1df0, type: 3}
+      propertyPath: AttackTarget
+      value: 
+      objectReference: {fileID: 855325456}
     - target: {fileID: 2493619429131918148, guid: 52b743296ecdbc0458f6c34c3adb1df0, type: 3}
       propertyPath: goal
       value: 
