@@ -8,17 +8,16 @@ public class PlayerMovement : MonoBehaviour
 {
     // Public variables for player settings
     public Camera playerCamera;
-    public float walkSpeed = 5f;
-    public float runSpeed = 10f;
+    public float walkSpeed = 6f;
+    public float runSpeed = 12f;
     public float jumpPower = 7f;
     public float gravity = 10f;
     public float lookSpeed = 2f;
     public float lookXLimit = 45f;
     public float defaultHeight = 2f;
-    public float crouchHeight = 1f;
     public float crouchMultiplier = 0.5f;
 
-    // Interaction settings (Input System only)
+    // Interaction settings
     public Transform interactionPoint;
     public float interactionRange = 1.5f;
 
@@ -40,12 +39,6 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         characterController = GetComponent<CharacterController>();
-        if (characterController == null)
-        {
-            Debug.LogError("PlayerMovement requires a CharacterController.");
-            enabled = false;
-            return;
-        }
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -68,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
 
         // Ensure controller center corresponds to default height
         characterController.height = Mathf.Max(0.1f, defaultHeight);
-        characterController.center = new Vector3(0f, characterController.height / 2f, 0f);
+        characterController.center = new Vector3(0f, characterController.height / 3f, 0f);
     }
 
     void Update()
@@ -158,20 +151,19 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!isCrouched)
         {
-            // Enter crouch
-            characterController.height = Mathf.Max(0.1f, crouchHeight);
+            // Crouch
+            characterController.height = Mathf.Max(0.1f, defaultHeight * crouchMultiplier);
             characterController.center = new Vector3(0f, characterController.height / 2f, 0f);
             isCrouched = true;
         }
         else
         {
-            // Exit crouch - naive uncrouch (no ceiling check). If you need safety, add a Physics check before standing.
+            // Stand up
             characterController.height = Mathf.Max(0.1f, defaultHeight);
-            characterController.center = new Vector3(0f, characterController.height / 2f, 0f);
+            characterController.center = new Vector3(0f, characterController.height / 3f, 0f);
             isCrouched = false;
         }
     }
-
     // Public to allow other scripts to enable / disable player movement.
     public void SetCanMove(bool enabled)
     {
