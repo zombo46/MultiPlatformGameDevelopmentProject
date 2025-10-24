@@ -10,6 +10,7 @@ public class SwitchCamera : MonoBehaviour
 
     public GameObject startCanvas;
     public GameObject deathCanvas;
+    public GameObject winCanvas;
 
     public PlayerMovement playerMovement;
     public PlayerVitality playerVitality;
@@ -95,13 +96,14 @@ public class SwitchCamera : MonoBehaviour
 
             startCanvas.SetActive(true);
             deathCanvas.SetActive(false);
+            winCanvas.SetActive(false);
         }
     }
 
     void ShowDeath()
     {
         hasSwitchedToMain = false;
-        
+
         playerDead = true;
 
         if (playerMovement != null)
@@ -123,6 +125,32 @@ public class SwitchCamera : MonoBehaviour
 
             startCanvas.SetActive(false);
             deathCanvas.SetActive(true);
+            winCanvas.SetActive(false);
+        }
+    }
+
+    void ShowWin()
+    {
+        if (playerMovement != null)
+        {
+            playerMovement.SetCanMove(false);
+            Debug.Log("Game Over!");
+        }
+
+        else
+        {
+            Debug.LogWarning("ShowWin: PlayerMovement is null; cannot disable movement for win.");
+        }
+
+        if (Camera2 != null)
+        {
+            Camera2.SetActive(true);
+            var cam2 = Camera2.GetComponent<Camera>();
+            if (cam2 != null) cam2.enabled = true;
+
+            startCanvas.SetActive(false);
+            deathCanvas.SetActive(false);
+            winCanvas.SetActive(true);
         }
     }
 
