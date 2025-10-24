@@ -1,26 +1,23 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class PlayerVitality : MonoBehaviour
 {
-    public float maxOxygen = 100f;
+    public float maxOxygen = 100;
     public float currentOxygen;
     public Slider oxygenBar;
     public Text oxygenText;
     private bool isDead = false;
 
-    public float PlayerMaxHealth = 100f;
-
+    public float PlayerMaxHealth = 100;
     public float PlayerCurrentHealth;
-
     public Slider HealthBar;
-
     public Text HealthText;
 
-    // Start is called before the first frame update
+    // When true, oxygen does not tick down.
+    private bool oxygenPaused = true;
+
     void Start()
     {
         currentOxygen = maxOxygen;
@@ -28,18 +25,19 @@ public class PlayerVitality : MonoBehaviour
         updateUI();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (isDead)
-        {
             return;
-        }
-        currentOxygen = currentOxygen - Time.deltaTime;
-        if (currentOxygen <= 0)
+
+        if (!oxygenPaused)
         {
-            currentOxygen = 0;
-            PlayerDeath();
+            currentOxygen -= Time.deltaTime;
+            if (currentOxygen <= 0)
+            {
+                currentOxygen = 0;
+                PlayerDeath();
+            }
         }
 
         if (PlayerCurrentHealth <= 0)
@@ -47,6 +45,7 @@ public class PlayerVitality : MonoBehaviour
             PlayerCurrentHealth = 0;
             PlayerDeath();
         }
+
         updateUI();
     }
 
@@ -55,28 +54,44 @@ public class PlayerVitality : MonoBehaviour
         PlayerCurrentHealth -= Amount;
     }
 
-    void updateUI() {
-        if (oxygenBar != null) {
-            oxygenBar.value = currentOxygen / maxOxygen;
-        }
-        if (oxygenText != null)
+    void updateUI()
+    {
+        if (oxygenBar != null)
         {
-            oxygenText.text = $"Oxygen level: {Mathf.Ceil(currentOxygen)}%";
+            if (oxygenBar.maxValue > 1f)
+                oxygenBar.value = Mathf.Clamp(currentOxygen, oxygenBar.minValue, oxygenBar.maxValue);
+            else
+                oxygenBar.value = Mathf.Clamp01(currentOxygen / maxOxygen);
         }
+
+        if (oxygenText != null)
+            oxygenText.text = $"Oxygen level: {Mathf.Ceil(currentOxygen)}%";
 
         if (HealthBar != null)
         {
-            HealthBar.value = PlayerCurrentHealth / PlayerMaxHealth;
+            if (HealthBar.maxValue > 1f)
+                HealthBar.value = Mathf.Clamp(PlayerCurrentHealth, HealthBar.minValue, HealthBar.maxValue);
+            else
+                HealthBar.value = Mathf.Clamp01(PlayerCurrentHealth / PlayerMaxHealth);
         }
 
         if (HealthText != null)
-        {
             HealthText.text = $"HP: {Mathf.Ceil(PlayerCurrentHealth)}";
-        }
     }
 
-    void PlayerDeath() {
+    void PlayerDeath()
+    {
         isDead = true;
-        Debug.Log("Game Over!");
+    }
+
+    // Public to pause or unpause oxygen depletion in other scripts.
+    public void SetOxygenPaused(bool paused)
+    {
+        oxygenPaused = paused;
+    }
+
+    public bool IsOxygenPaused()
+    {
+        return oxygenPaused;
     }
 }

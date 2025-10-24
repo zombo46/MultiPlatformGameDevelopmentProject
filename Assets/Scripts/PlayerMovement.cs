@@ -24,23 +24,12 @@ public class PlayerMovement : MonoBehaviour
     // Flag to control if the player can move - set to false to disable movement.
     private bool canMove = true;
 
-    
-
     void Start()
     {
         // Get the CharacterController component attached to this GameObject and lock the cursor to the center of the screen. Used for first-person camera control.
         characterController = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
-        // Initialize rotation state from existing transforms so pitch continues from the current camera angle.
-        rotationY = transform.eulerAngles.y;
-        if (playerCamera != null)
-        {
-            float camPitch = playerCamera.transform.localEulerAngles.x;
-            if (camPitch > 180f) camPitch -= 360f; // convert 0..360 to -180..180
-            rotationX = camPitch;
-        }
     }
 
     void Update()
@@ -108,5 +97,21 @@ public class PlayerMovement : MonoBehaviour
 
             transform.localRotation = Quaternion.Euler(0f, rotationY, 0f);
         }
+    }
+
+    // Public to allow other scripts to enable / disable player movement.
+    public void SetCanMove(bool enabled)
+    {
+        canMove = enabled;
+        if (!canMove)
+        {
+            // stop any residual movement and rotation immediately
+            moveDirection = Vector3.zero;
+        }
+    }
+
+    public bool GetCanMove()
+    {
+        return canMove;
     }
 }
