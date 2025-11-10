@@ -10,18 +10,21 @@ public class EnemyDamage : MonoBehaviour
     private float NextAttack = 0f;
     public GameObject AttackTarget;
 
-    public float DamageAmount = 5f;
+    public float DamageAmount = 1f;
     // Start is called before the first frame update
 
     public void ApplyDamage()
     {
-        if (Time.time >= NextAttack)
-        {
-            AttackTarget.SendMessage("ReduceHealth", DamageAmount);
-            NextAttack = Time.time + EnemyAttackSpeed;
+        if (Time.time < NextAttack) {
+            return;
         }
-        
-        return;
+
+        if (AttackTarget != null)
+        {
+            AttackTarget.SendMessage("ReduceHealth", 1f, SendMessageOptions.DontRequireReceiver);
+        }
+
+        NextAttack = Time.time + EnemyAttackSpeed;
     }
     void Start()
     {

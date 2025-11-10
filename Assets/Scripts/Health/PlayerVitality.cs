@@ -10,13 +10,16 @@ public class PlayerVitality : MonoBehaviour
     public Text oxygenText;
     private bool isDead = false;
 
-    public float PlayerMaxHealth = 100;
-    public float PlayerCurrentHealth;
-    public Slider HealthBar;
-    public Text HealthText;
+    public int PlayerMaxHealth = 3;
+    public int PlayerCurrentHealth;
+    
+    public Image[] hearts;
+    public Sprite fullHeart;
+    public Sprite emptyHeart;
 
     // When true, oxygen does not tick down.
-    private bool oxygenPaused = true;
+    private bool oxygenPaused = false;
+
 
     void Start()
     {
@@ -51,15 +54,26 @@ public class PlayerVitality : MonoBehaviour
 
     public void ReduceHealth(float Amount)
     {
-        PlayerCurrentHealth -= Amount;
+        if (isDead) {
+            return;
+        } else {
+            int damage = Mathf.Max(1, Mathf.RoundToInt(Amount));
+            PlayerCurrentHealth = Mathf.Clamp(PlayerCurrentHealth - damage, 0, PlayerMaxHealth);
+            updateUI();
+            if (PlayerCurrentHealth <= 0) {
+                PlayerDeath();
+            }
+        }
     }
+
+    public bool IsDead() => isDead;
 
     public void revive()
     {
         isDead = false;
         currentOxygen = maxOxygen;
         PlayerCurrentHealth = PlayerMaxHealth;
-
+        updateUI();
         this.transform.position = new Vector3(135f, 1f, 132f);
     }
 
@@ -76,16 +90,16 @@ public class PlayerVitality : MonoBehaviour
         if (oxygenText != null)
             oxygenText.text = $"Oxygen level: {Mathf.Ceil(currentOxygen)}%";
 
-        if (HealthBar != null)
-        {
-            if (HealthBar.maxValue > 1f)
-                HealthBar.value = Mathf.Clamp(PlayerCurrentHealth, HealthBar.minValue, HealthBar.maxValue);
-            else
-                HealthBar.value = Mathf.Clamp01(PlayerCurrentHealth / PlayerMaxHealth);
+        if (hearts != null && hearts.Length > 0 && fullHeart != null && emptyHeart != null) {
+            int heartCount = hearts.Length;
+            for (int i = 0; i < heartCount; i++) {
+                if (i < PlayerCurrentHealth) {
+                    hearts[i].sprite = fullHeart;
+                } else {
+                    hearts[i].sprite = emptyHeart;
+                }
+            }
         }
-
-        if (HealthText != null)
-            HealthText.text = $"HP: {Mathf.Ceil(PlayerCurrentHealth)}";
     }
 
     void PlayerDeath()
